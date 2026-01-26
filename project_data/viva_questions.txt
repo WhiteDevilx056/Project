@@ -1,0 +1,70 @@
+=============================================
+       VIVA QUESTIONS & ANSWERS (With Code Examples)
+=============================================
+
+--- SECTION 1: LOGIC & ALGORITHM ---
+
+Q1. Project ka main logic (Encryption) kya hai?
+Ans: Sir, maine "ASCII Shifting" use kiya hai. Har character ki value mein 100 add kar diya taaki wo badal jaye aur koi padh na sake.
+Code Example:
+   ch = ch + 100;  // Agar 'A' (65) tha, toh ab (165) ban gaya.
+
+Q2. Decryption kaise kaam karta hai?
+Ans: Encryption ka ulta karte hain. Jo 100 add kiya tha, usko wapas minus kar dete hain taaki original text wapas aa jaye.
+Code Example:
+   ch = ch - 100;  // Wapas original letter mil gaya.
+
+--- SECTION 2: POINTERS (Sabse Important) ---
+
+Q3. 'FILE *source' kya hai?
+Ans: Sir, ye Hard Disk ka address nahi hai. Ye RAM mein ek "Control Box" ka address hai jo file ko handle karta hai.
+Code Example:
+   FILE *source = fopen("data.txt", "r"); // source ko RAM ka address mila.
+
+Q4. Function mein 'char *filename' kyun use kiya?
+Ans: Pura naam copy karne mein memory waste hoti hai. Humne bas pehle letter ka address bheja, jo fast hai.
+Code Example:
+   void encrypt(char *ptr) { ... } // Yahan sirf address aaya, puri string nahi.
+
+--- SECTION 3: FILE HANDLING ---
+
+Q5. 'temp.txt' (Temporary File) kyun banayi?
+Ans: Hum same file ko padhte hue usme likh nahi sakte (data kharab ho jayega). Isliye pehle temp file mein likha.
+Code Example:
+   source = fopen("original.txt", "r"); // Yahan se padho
+   target = fopen("temp.txt", "w");     // Yahan likho
+
+Q6. EOF kya hota hai?
+Ans: EOF ka matlab "End Of File" (-1). Ye loop ko batata hai ki file khatam ho gayi hai, ab ruk jao.
+Code Example:
+   while( (ch = fgetc(source)) != EOF ) { ... }
+
+Q7. fopen() ke baad 'if(source == NULL)' kyun lagaya?
+Ans: Agar file exist nahi karti, toh program crash na ho. Ye check karta hai ki file mili ya nahi.
+Code Example:
+   if(source == NULL) { printf("File nahi mili!"); return; }
+
+--- SECTION 4: FUNCTIONS ---
+
+Q8. remove() aur rename() ka kya kaam hai?
+Ans: Jab kaam pura ho gaya, toh purani file delete kardi aur nayi wali (temp) ka naam badal kar original kar diya.
+Code Example:
+   remove("data.txt");       // Purani delete
+   rename("temp.txt", "data.txt"); // Nayi ka naam change
+
+Q9. fgetc() aur fputc() kya karte hain?
+Ans: fgetc ek character padhta hai, aur fputc ek character file mein likhta hai.
+Code Example:
+   ch = fgetc(source); // Ek letter uthaya
+   fputc(ch, target);  // Ek letter likha
+
+--- TRICKY QUESTIONS (Bonus) ---
+
+Q10. Main function mein 'fclose(validatefile)' turant kyun kiya?
+Ans: Sir, humne file bas check karne ke liye kholi thi. Agar hum close nahi karenge, toh file "Open" reh jayegi aur memory waste hogi. Baad mein jab encrypt function wapas file kholega, toh conflict ho sakta hai.
+Code Example:
+   fclose(validatefile); // Check karne ke baad darwaza band karna zaroori hai.
+
+=============================================
+       ALL THE BEST FOR YOUR VIVA!
+=============================================
