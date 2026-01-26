@@ -42,7 +42,9 @@ void encryptFile(char *filename) {
     remove(filename);
     rename("temp.txt", filename);
 
-    printf("Magic Done: File encrypted successfully.\n");
+    printf("\n*************************************************\n");
+    printf("*   Magic Done: File encrypted successfully!    *\n");
+    printf("*************************************************\n");
 }
 
 void decryptFile(char *filename) {
@@ -74,7 +76,9 @@ void decryptFile(char *filename) {
     remove(filename);
     rename("temp.txt", filename);
 
-    printf("Magic Done: File decrypted successfully.\n");
+    printf("\n*************************************************\n");
+    printf("*   Magic Done: File decrypted successfully!    *\n");
+    printf("*************************************************\n");
 }
 
 int main() {
@@ -84,7 +88,9 @@ int main() {
     const char secretPass[] = "1234"; // Yahan apna password set karein
     FILE *checkFile;
 
-    printf("--- File-Guard Project (Secure) ---\n");
+    printf("\n*************************************************\n");
+    printf("*         File-Guard Project (Secure)           *\n");
+    printf("*************************************************\n");
     printf("Enter filename (e.g., data.txt): ");
     scanf("%s", filename);
 
@@ -98,7 +104,9 @@ int main() {
 
     // Step 2: Menu Loop (Validates input)
     while (1) {
-        printf("\n1. Encrypt (Lock)\n2. Decrypt (Unlock)\n3. Exit\n");
+        printf("\n-------------------------------------------------\n");
+        printf("1. Encrypt (Lock)\n2. Decrypt (Unlock)\n3. Exit\n");
+        printf("-------------------------------------------------\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
 
@@ -113,7 +121,7 @@ int main() {
 
     int attempts = 0;
     while (attempts < 3) {
-        printf("Enter Password to continue: ");
+        printf("\n[SECURE ACCESS] Enter Password to continue: ");
         scanf("%s", password);
 
         if (strcmp(password, secretPass) == 0) {

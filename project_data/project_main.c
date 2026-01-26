@@ -104,16 +104,25 @@ int main(){
 
     FILE *validatefile;
     
+while (1)
+{
+    
 
 printf("*********Cryptography data encryption**********\n");
     printf("Enter your filename (ex. data.txt): ");
     scanf("%s", filename);
     validatefile=fopen(filename, "r");
     if(validatefile==NULL){
-        printf("File does not exist.\n");
-        return 0;
+        printf("------------>File does not exist.\n");
+        printf("------------>Please enter a valid filename.\n");
+        printf("**********************************************\n");
+    } 
+    
+    else {
+        fclose(validatefile);
+        break;
     }
-    fclose(validatefile);
+}
 
 while (1)
 {
@@ -169,13 +178,9 @@ switch (option)
 case 1:
     encryptdata(filename);
     break;
-
-        printf("Congratulations! your file is encrypted.\n");
 case 2: 
     decryptdata(filename);
     break;
-    
-    printf("Congratulations! your file is decrypted.\n");
 
 }
 
