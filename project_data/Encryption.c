@@ -5,7 +5,7 @@
 -------------------------------------------------
  Program Name : File Guard System
  Purpose      : Encrypt and Decrypt Text Files
- Developer    : (Your Name)
+ Developer    : (Vaibhav and Pawan)
 -------------------------------------------------
 */
 
