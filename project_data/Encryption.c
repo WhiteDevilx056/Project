@@ -25,7 +25,7 @@ void encryptFile(char *location) {
         fclose(source);
         return;
     }
-
+//EOF ka value -1
     while ((ch = fgetc(source)) != EOF) {
         ch = ch + 100;
         fputc(ch, target);
