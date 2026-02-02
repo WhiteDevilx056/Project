@@ -2,139 +2,109 @@
 #include <string.h>
 
 /*
--------------------------------------------------
- Program Name : File Guard System
- Purpose      : Encrypt and Decrypt Text Files
- Developer    : (Vaibhav and Pawan)
--------------------------------------------------
-*/
+ * Project: File-Guard
+ * Logic: ASCII Shifting
+ * 
+ * Encryption: ch = ch + 100
+ * Decryption: ch = ch - 100
+ */
 
-/* Function to Encrypt File */
-void encryptFile(char *location)
-{
-    FILE *source, *target;   // File pointers
-    int ch;                  // Variable to store each character
+void encryptFile(char *location) {
+    FILE *source, *target;
+    int ch;
 
-    /* Open original file in read mode */
     source = fopen(location, "r");
-
-    if (source == NULL)
-    {
-        printf("\n[ERROR] File could not be opened!\n");
+    if (source == NULL) {
+        printf("Error: Could not open file %s. Make sure it exists.\n", location);
         return;
     }
 
-    /* Create temporary file in write mode */
     target = fopen("temp.txt", "w");
-
-    if (target == NULL)
-    {
-        printf("\n[ERROR] Temporary file could not be created!\n");
+    if (target == NULL) {
+        printf("Error: Could not create temporary file.\n");
         fclose(source);
         return;
     }
 
-    /* Encryption Logic: Add 100 to each character */
-    while ((ch = fgetc(source)) != EOF)
-    {
-        ch = ch + 100;          // Encrypt character
-        fputc(ch, target);     // Write encrypted character
+    while ((ch = fgetc(source)) != EOF) {
+        ch = ch + 100;
+        fputc(ch, target);
     }
 
-    /* Close both files */
     fclose(source);
     fclose(target);
 
-    /* Replace original file with encrypted file */
     remove(location);
     rename("temp.txt", location);
 
-    printf("\n[SUCCESS] File encrypted successfully!\n");
+    printf("Congratulations: File encrypted successfully.\n");
 }
 
-/* Function to Decrypt File */
-void decryptFile(char *location)
-{
-    FILE *source, *target;   // File pointers
-    int ch;                  // Variable to store each character
+void decryptFile(char *location) {
+    FILE *source, *target;
+    int ch;
 
-    /* Open encrypted file in read mode */
     source = fopen(location, "r");
-
-    if (source == NULL)
-    {
-        printf("\n[ERROR] File could not be opened!\n");
+    if (source == NULL) {
+        printf("Error: Could not open file %s.\n", location);
         return;
     }
 
-    /* Create temporary file */
     target = fopen("temp.txt", "w");
-
-    if (target == NULL)
-    {
-        printf("\n[ERROR] Temporary file could not be created!\n");
+    if (target == NULL) {
+        printf("Error: Could not create temporary file.\n");
         fclose(source);
         return;
     }
 
-    /* Decryption Logic: Subtract 100 from each character */
-    while ((ch = fgetc(source)) != EOF)
-    {
-        ch = ch - 100;          // Decrypt character
-        fputc(ch, target);     // Write original character
+    while ((ch = fgetc(source)) != EOF) {
+        ch = ch - 100;
+        fputc(ch, target);
     }
 
-    /* Close files */
     fclose(source);
     fclose(target);
 
-    /* Replace encrypted file with decrypted file */
     remove(location);
     rename("temp.txt", location);
 
-    printf("\n[SUCCESS] File decrypted successfully!\n");
+    printf("Congratulations: File decrypted successfully.\n");
 }
 
-/* Main Function */
-int main()
-{
-    char filename[100];   // Store file name
-    int choice;           // Store user choice
+int main() {
+    char filename[100];
+    int choice;
 
-    /* Program Banner */
-    printf("\n====================================\n");
-    printf("        FILE GUARD SYSTEM\n");
-    printf("     Encrypt & Decrypt Files\n");
-    printf("====================================\n");
-
-    /* Take file name from user */
-    printf("\nEnter File Name: ");
+    printf("--- File-Guard Project ---\n");
+    printf("Enter filename (e.g., data.txt): ");
     scanf("%99s", filename);
 
-    /* Display Menu */
-    printf("\n--------- MENU ---------\n");
-    printf("1. Encrypt File\n");
-    printf("2. Decrypt File\n");
-    printf("------------------------\n");
+    printf("\n1. Encrypt (Lock)\n2. Decrypt (Unlock)\nEnter choice: ");
 
-    printf("Enter Your Choice: ");
-    scanf("%d", &choice);
-
-    /* Perform selected operation */
-    if (choice == 1)
-    {
-        encryptFile(filename);
-    }
-    else if (choice == 2)
-    {
-        decryptFile(filename);
-    }
-    else
-    {
-        printf("\n[ERROR] Invalid Choice!\n");
+    /* Choice Validation */
+    if (scanf("%d", &choice) != 1) {
+        printf("Invalid input! Please enter a number.\n");
+        return 0;
     }
 
-    printf("\nThank You for Using File Guard System.\n");
+    switch (choice) {
+        case 1:
+            encryptFile(filename);
+            break;
+
+        case 2:
+            decryptFile(filename);
+            break;
+
+        default:
+            printf("Invalid choice!\n");
+    }
+
+    return 0;
+}
+        default:
+            printf("Invalid choice!\n");
+    }
 
     return 0;
 }
