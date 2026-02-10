@@ -9,13 +9,13 @@
  * Decryption: ch = ch - 100
  */
 
-void encryptFile(char *filename) {
+void encryptFile(char *fileToEncrypt) {
     FILE *source, *target;
     int ch;
 
-    source = fopen(filename, "r");
+    source = fopen(fileToEncrypt, "r");
     if (source == NULL) {
-        printf("Error: Could not open file %s. Make sure it exists.\n", filename);
+        printf("Error: Could not open file %s. Make sure it exists.\n", fileToEncrypt);
         return;
     }
 
@@ -36,19 +36,19 @@ void encryptFile(char *filename) {
     fclose(target);
 
     // Replace original file with encrypted file
-    remove(filename);
-    rename("temp.txt", filename);
+    remove(fileToEncrypt);
+    rename("temp.txt", fileToEncrypt);
 
     printf("Magic Done: File encrypted successfully (Gibberish mode ON).\n");
 }
 
-void decryptFile(char *filename) {
+void decryptFile(char *fileToDecrypt) {
     FILE *source, *target;
     int ch;
 
-    source = fopen(filename, "r");
+    source = fopen(fileToDecrypt, "r");
     if (source == NULL) {
-        printf("Error: Could not open file %s.\n", filename);
+        printf("Error: Could not open file %s.\n", fileToDecrypt);
         return;
     }
 
@@ -69,29 +69,29 @@ void decryptFile(char *filename) {
     fclose(target);
 
     // Replace original file with decrypted file
-    remove(filename);
-    rename("temp.txt", filename);
+    remove(fileToDecrypt);
+    rename("temp.txt", fileToDecrypt);
 
     printf("Magic Done: File decrypted successfully (Original content restored).\n");
 }
 
 int main() {
-    char filename[100];
+    char userFilename[100];
     int choice;
 
     printf("--- File-Guard Project ---\n");
     printf("Enter filename (e.g., data.txt): ");
-    scanf("%s", filename);
+    scanf("%s", userFilename);
 
     printf("\n1. Encrypt (Lock)\n2. Decrypt (Unlock)\nEnter choice: ");
     scanf("%d", &choice);
 
     switch (choice) {
         case 1:
-            encryptFile(filename);
+            encryptFile(userFilename);
             break;
         case 2:
-            decryptFile(filename);
+            decryptFile(userFilename);
             break;
         default:
             printf("Invalid choice!\n");
